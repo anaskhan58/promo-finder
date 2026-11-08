@@ -74,7 +74,9 @@ def cmd_run(args) -> int:
     usage = getattr(scorer, "usage", None)
     meta = {
         "show": _show_name(args.input),
-        "input": os.path.abspath(args.input),
+        # Folder name only, never the absolute path: these files get shared,
+        # and a home directory in them tells the reader whose machine ran it.
+        "input": os.path.basename(os.path.normpath(args.input)),
         "episodes": len(episodes),
         "blocks": blocks,
         "candidates": len(candidates),
