@@ -1,0 +1,17 @@
+# The show pack is confidential - never commit it, and never commit anything
+# derived from it. Share raw outputs and the filled label sheet through a
+# link-only Drive folder instead.
+input_pack/
+*.zip
+raw_outputs/
+outputs/
+eval/labels.csv
+
+# the synthetic demo pack IS committed - it contains no real show content
+!demo_pack/
+
+__pycache__/
+*.pyc
+.venv/
+.env
+.streamlit/secrets.toml

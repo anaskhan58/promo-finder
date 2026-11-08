@@ -1,0 +1,13 @@
+id,human_label_0_to_3,note
+# Fill this in after a run:
+#   python -m promofinder label --pred outputs/promos.json --out eval/labels.csv
+#
+# 3 = post it today   2 = usable, needs a tighter cut   1 = weak   0 = not a promo
+# A clip counts as a hit at 2 or above, because that is the bar for an editor
+# opening the file and doing something with it.
+#
+# Label by reading the transcript of each clip, not by reading the score.
+# Label some clips the tool ranked badly as well as the ones it ranked well,
+# or precision at k tells you nothing.
+ep001-0032.00-0112.00,3,"Hook lands at 0.0s and it cuts on an unresolved reveal."
+ep002-0037.40-0108.00,2,"Strong ending but the opening line needs the scene before it."

@@ -1,0 +1,14 @@
+# The core pipeline (parse, candidate generation, ranking, reports) is pure
+# standard library and needs nothing here. Install only what you need.
+
+# --provider anthropic (default when a credential is present)
+anthropic>=0.40.0
+
+# --provider gemini / --provider ollama
+requests>=2.31.0
+
+# --provider openai
+# openai>=1.40.0
+
+# the browser viewer (app.py) only
+streamlit>=1.36.0

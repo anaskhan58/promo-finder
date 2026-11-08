@@ -1,0 +1,194 @@
+EPISODE NUMBER: Episode 1
+EPISODE LOGLINE: On the morning of the company's biggest funding announcement, junior analyst Mira is publicly fired by the CEO for a leaked document she did not write, moments before the investor she is accused of leaking to walks in and calls her by name.
+CONTINUITY NOTES: First episode. Synthetic demo content written for this prototype. Not from any real show.
+
+--- SCRIPT START ---
+
+SCENE 01
+Scene heading: INT. HARLOW CAPITAL - GLASS BOARDROOM - MORNING
+Scene start: 00:00.00
+Scene end: 01:12.00
+
+Actions and dialogue:
+
+**CAMERA:**
+Start: (00:00.00) | End: (00:03.20)
+Slow push-in through glass walls on a long boardroom table, twelve seated executives, one empty chair.
+
+**ACTION:**
+Start: (00:01.40) | End: (00:03.20)
+Mira steps into the room clutching a laptop against her chest, her badge still clipped crooked to her collar.
+
+**CAMERA:**
+Start: (00:03.20) | End: (00:05.60)
+Medium shot of DANIEL HARLOW at the head of the table, sliding a printed document face down across the polished surface.
+
+**DANIEL HARLOW (Cold, Controlled):**
+Start: (00:03.60) | End: (00:05.40)
+"Sit down, Mira."
+
+**CAMERA:**
+Start: (00:05.60) | End: (00:08.10)
+Close-up on Mira's face, confusion flickering into alarm as she registers the silence.
+
+**MIRA (Uncertain):**
+Start: (00:06.20) | End: (00:07.80)
+"Is something wrong?"
+
+**ACTION:**
+Start: (00:08.10) | End: (00:10.40)
+Daniel flips the document over. The header reads CONFIDENTIAL - PROJECT ORCHARD in heavy black type.
+
+**CAMERA:**
+Start: (00:08.10) | End: (00:10.40)
+Tight insert on the document as it turns, the red confidentiality stamp filling the frame.
+
+**DANIEL HARLOW (Flat, Dangerous):**
+Start: (00:10.60) | End: (00:13.20)
+"This was in a journalist's inbox at six this morning."
+
+**CAMERA:**
+Start: (00:13.20) | End: (00:15.40)
+Close-up on Mira, the blood draining from her face.
+
+**MIRA (Breathless):**
+Start: (00:13.80) | End: (00:15.20)
+"That isn't mine."
+
+**CAMERA:**
+Start: (00:15.40) | End: (00:18.00)
+Medium two-shot as Daniel leans back, utterly unmoved.
+
+**DANIEL HARLOW (Clipped):**
+Start: (00:15.80) | End: (00:17.90)
+"It was sent from your account."
+
+**SOUND FX:**
+Start: (00:18.00) | End: (00:19.20)
+A low bass hit lands under the line, the room tone dropping out entirely.
+
+**CAMERA:**
+Start: (00:18.00) | End: (00:21.60)
+Slow pan across the boardroom. Not one executive meets Mira's eyes.
+
+**MIRA (Rising, Desperate):**
+Start: (00:19.40) | End: (00:22.60)
+"Someone used my login. Check the access logs, check anything -"
+
+**CAMERA:**
+Start: (00:22.60) | End: (00:25.00)
+Close-up on VERA LANGE, head of compliance, closing a folder with deliberate finality.
+
+**VERA LANGE (Crisp, Rehearsed):**
+Start: (00:23.00) | End: (00:25.80)
+"We already did. Twice."
+
+**ACTION:**
+Start: (00:25.80) | End: (00:28.40)
+Vera slides a single sheet across the table. Mira's name sits at the top beside a timestamp.
+
+**CAMERA:**
+Start: (00:28.40) | End: (00:30.60)
+Extreme close-up on Mira's hands, trembling as she reaches for the page.
+
+**MIRA (Quiet, Shaken):**
+Start: (00:29.00) | End: (00:31.20)
+"I was on a train at six."
+
+**CAMERA:**
+Start: (00:31.20) | End: (00:33.80)
+Medium shot of Daniel rising from his chair, buttoning his jacket.
+
+**DANIEL HARLOW (Dismissive):**
+Start: (00:32.00) | End: (00:34.60)
+"Security will walk you out."
+
+**MIRA (Sharp, Defiant):**
+Start: (00:34.80) | End: (00:36.40)
+"You are making a mistake."
+
+**CAMERA:**
+Start: (00:36.40) | End: (00:39.00)
+Close-up on Daniel turning back, his expression hardening into contempt.
+
+**DANIEL HARLOW (Cutting, Final):**
+Start: (00:37.00) | End: (00:40.80)
+"I hired you out of a community college. That was the mistake."
+
+**SOUND FX:**
+Start: (00:40.80) | End: (00:42.20)
+A sharp intake of breath ripples around the table.
+
+**CAMERA:**
+Start: (00:41.00) | End: (00:44.20)
+Close-up on Mira absorbing the insult, her jaw tightening, tears held back by sheer will.
+
+**ACTION:**
+Start: (00:44.20) | End: (00:47.00)
+Mira stands. She places her badge on the table without looking down, deliberately, and does not let go of the laptop.
+
+**CAMERA:**
+Start: (00:44.20) | End: (00:47.00)
+Low-angle medium shot of Mira rising, the executives small behind her.
+
+**SOUND FX:**
+Start: (00:47.00) | End: (00:48.60)
+The hard plastic click of the badge settling on the lacquered table.
+
+**CAMERA:**
+Start: (00:48.60) | End: (00:51.40)
+Wide shot as the boardroom door swings open behind her.
+
+**ACTION:**
+Start: (00:49.20) | End: (00:52.80)
+A tall man in a grey overcoat steps into the doorway, folder under one arm, taking in the room in a single glance.
+
+**CAMERA:**
+Start: (00:52.80) | End: (00:55.20)
+Medium shot of Daniel's face changing instantly, the contempt replaced by a careful, practised smile.
+
+**DANIEL HARLOW (Suddenly Warm):**
+Start: (00:53.20) | End: (00:55.80)
+"Mr. Okonkwo. You're early."
+
+**CAMERA:**
+Start: (00:55.80) | End: (00:58.60)
+Close-up on the man in the overcoat. He does not look at Daniel. He looks at Mira.
+
+**JULIAN OKONKWO (Calm, Certain):**
+Start: (00:57.00) | End: (00:59.40)
+"Mira. Good, you're still here."
+
+**CAMERA:**
+Start: (00:59.40) | End: (01:02.00)
+Whip pan to Daniel, his smile frozen in place.
+
+**DANIEL HARLOW (Thrown):**
+Start: (01:00.00) | End: (01:01.80)
+"You two have met?"
+
+**CAMERA:**
+Start: (01:02.00) | End: (01:04.60)
+Close-up on Mira, equally stunned, shaking her head almost imperceptibly.
+
+**MIRA (Whispering):**
+Start: (01:02.60) | End: (01:04.20)
+"We haven't."
+
+**CAMERA:**
+Start: (01:04.60) | End: (01:07.80)
+Medium shot of Julian stepping fully into the room and setting his folder down on the table.
+
+**JULIAN OKONKWO (Even, Deliberate):**
+Start: (01:05.20) | End: (01:08.60)
+"No. But I have read everything she has written for three years."
+
+**SOUND FX:**
+Start: (01:08.60) | End: (01:10.40)
+A single sustained string note rises beneath the line and holds, unresolved.
+
+**CAMERA:**
+Start: (01:09.00) | End: (01:12.00)
+Push-in close-up on Daniel, the colour leaving his face as the implication lands. Cut to black.
+
+--- SCRIPT END ---

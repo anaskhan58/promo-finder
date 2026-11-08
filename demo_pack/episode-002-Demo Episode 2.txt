@@ -1,0 +1,178 @@
+EPISODE NUMBER: Episode 2
+EPISODE LOGLINE: Julian reveals he has been quietly funding the project Mira was fired for leaking, and that the real leak came from inside the boardroom, forcing Daniel to defend himself in front of the investor who holds his company's future.
+CONTINUITY NOTES: Picks up seconds after Episode 1. Synthetic demo content written for this prototype. Not from any real show.
+
+--- SCRIPT START ---
+
+SCENE 01
+Scene heading: INT. HARLOW CAPITAL - GLASS BOARDROOM - CONTINUOUS
+Scene start: 00:00.00
+Scene end: 01:08.00
+
+Actions and dialogue:
+
+**CAMERA:**
+Start: (00:00.00) | End: (00:02.80)
+Medium shot of Julian opening his folder, the room utterly still around him.
+
+**JULIAN OKONKWO (Measured):**
+Start: (00:00.40) | End: (00:03.20)
+"Before anyone leaves, I have a question."
+
+**CAMERA:**
+Start: (00:03.20) | End: (00:05.40)
+Close-up on Daniel, forcing his smile back into place.
+
+**DANIEL HARLOW (Smooth):**
+Start: (00:03.80) | End: (00:05.60)
+"Of course. Anything."
+
+**CAMERA:**
+Start: (00:05.60) | End: (00:08.80)
+Close-up on Julian sliding a printed email across the table toward Daniel.
+
+**JULIAN OKONKWO (Quiet, Lethal):**
+Start: (00:06.40) | End: (00:09.60)
+"Who sent me Project Orchard eleven months ago?"
+
+**SOUND FX:**
+Start: (00:09.60) | End: (00:11.00)
+The room tone drops out. A single low pulse under the silence.
+
+**CAMERA:**
+Start: (00:09.80) | End: (00:13.00)
+Slow pan across the executives. Vera Lange's hand stops halfway to her water glass.
+
+**DANIEL HARLOW (Faltering):**
+Start: (00:11.40) | End: (00:13.60)
+"Eleven months?"
+
+**CAMERA:**
+Start: (00:13.60) | End: (00:16.20)
+Medium shot of Julian, entirely unhurried, tapping the page once.
+
+**JULIAN OKONKWO (Flat):**
+Start: (00:14.00) | End: (00:17.40)
+"Before Mira Castellanos was given access to it. Before she was given access to anything."
+
+**CAMERA:**
+Start: (00:17.40) | End: (00:19.80)
+Close-up on Mira, her head lifting slowly.
+
+**MIRA (Dawning):**
+Start: (00:18.20) | End: (00:20.00)
+"Eleven months."
+
+**CAMERA:**
+Start: (00:20.00) | End: (00:22.60)
+Close-up on Vera Lange, her composure cracking at the edges.
+
+**VERA LANGE (Too Quickly):**
+Start: (00:20.60) | End: (00:23.00)
+"That timeline cannot be right."
+
+**CAMERA:**
+Start: (00:23.00) | End: (00:26.40)
+Medium shot of Julian turning his head toward Vera for the first time.
+
+**JULIAN OKONKWO (Mild):**
+Start: (00:23.80) | End: (00:26.00)
+"I did not say when I received it."
+
+**SOUND FX:**
+Start: (00:26.40) | End: (00:27.80)
+A sharp string stab punches the realisation.
+
+**CAMERA:**
+Start: (00:26.60) | End: (00:30.00)
+Rapid cut between Vera's stricken face and Mira's slowly widening eyes.
+
+**MIRA (Hardening):**
+Start: (00:28.20) | End: (00:30.60)
+"You checked my logs twice, Vera."
+
+**CAMERA:**
+Start: (00:30.60) | End: (00:33.20)
+Close-up on Vera, gripping the edge of the table.
+
+**VERA LANGE (Brittle):**
+Start: (00:31.00) | End: (00:33.00)
+"I followed procedure."
+
+**MIRA (Rising, Furious):**
+Start: (00:33.40) | End: (00:36.80)
+"You wrote the procedure. You wrote the report. You picked the name at the top of it."
+
+**CAMERA:**
+Start: (00:33.40) | End: (00:36.80)
+Low-angle push-in on Mira as she steps toward the head of the table.
+
+**ACTION:**
+Start: (00:36.80) | End: (00:39.40)
+Daniel moves between them, one hand raised, his voice dropping to a hiss.
+
+**DANIEL HARLOW (Low, Threatening):**
+Start: (00:37.40) | End: (00:40.20)
+"Not in front of him. Not another word."
+
+**CAMERA:**
+Start: (00:40.20) | End: (00:43.00)
+Close-up on Mira looking directly past Daniel at Julian, ignoring him completely.
+
+**MIRA (Clear, Steady):**
+Start: (00:41.00) | End: (00:44.40)
+"Ask him who signed off on my access date."
+
+**CAMERA:**
+Start: (00:44.40) | End: (00:47.00)
+Close-up on Daniel. The threat drains out of his face and leaves nothing behind it.
+
+**SOUND FX:**
+Start: (00:47.00) | End: (00:48.40)
+A long, low cello note begins to build.
+
+**CAMERA:**
+Start: (00:47.20) | End: (00:50.60)
+Medium shot of Julian closing his folder with a soft, final snap.
+
+**JULIAN OKONKWO (Soft, Decided):**
+Start: (00:48.80) | End: (00:51.60)
+"Daniel. Sit down."
+
+**CAMERA:**
+Start: (00:51.60) | End: (00:54.20)
+Wide shot of the boardroom. Daniel stands alone in the centre of it.
+
+**DANIEL HARLOW (Thin):**
+Start: (00:52.40) | End: (00:54.00)
+"This is my company."
+
+**CAMERA:**
+Start: (00:54.20) | End: (00:57.60)
+Close-up on Julian, who finally looks up and holds Daniel's gaze.
+
+**JULIAN OKONKWO (Quiet, Devastating):**
+Start: (00:55.00) | End: (00:58.60)
+"It was. Until nine this morning."
+
+**SOUND FX:**
+Start: (00:58.60) | End: (01:00.40)
+The cello note peaks into a hard, unresolved cliffhanger sting.
+
+**CAMERA:**
+Start: (00:58.80) | End: (01:02.00)
+Extreme close-up on Daniel's hand gripping the back of his chair, knuckles white.
+
+**ACTION:**
+Start: (01:02.00) | End: (01:05.20)
+Mira turns and walks toward the door, the laptop still under her arm, not looking back.
+
+**CAMERA:**
+Start: (01:02.00) | End: (01:05.20)
+Tracking shot following Mira out, the boardroom collapsing into noise behind her.
+
+**MIRA (Over Shoulder, Cold):**
+Start: (01:05.40) | End: (01:08.00)
+"Check the logs a third time."
+
+--- SCRIPT END ---
