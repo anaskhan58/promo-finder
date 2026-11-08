@@ -5,6 +5,7 @@ Command line entry point.
     python -m promofinder inspect --input ../input_pack
     python -m promofinder label   --pred outputs/promos.json --out eval/labels.csv
     python -m promofinder eval    --pred outputs/promos.json --labels eval/labels.csv
+    python -m promofinder models  --provider gemini
 """
 
 from __future__ import annotations
@@ -16,7 +17,7 @@ import sys
 import time
 from typing import List
 
-from .llm import DEFAULT_MODELS, build_scorer
+from .llm import DEFAULT_MODELS, build_scorer, list_models
 from .parse import fmt_timestamp, load_episodes
 from .rank import posting_order, rank
 from .report import write_all
@@ -160,6 +161,27 @@ def cmd_eval(args) -> int:
     return run_eval(args.pred, args.labels)
 
 
+def cmd_models(args) -> int:
+    """Which model ids this provider will serve today."""
+    try:
+        names = list_models(args.provider)
+    except Exception as exc:  # noqa: BLE001 - surfaced to the user as a message
+        print("Could not list %s models: %s" % (args.provider, exc), file=sys.stderr)
+        return 2
+    default = DEFAULT_MODELS.get(args.provider)
+    print("%d model(s) available from %s:" % (len(names), args.provider))
+    for n in names:
+        print("   %s%s" % (n, "   <- default" if n == default else ""))
+    if default and default not in names:
+        print()
+        print("WARNING: the default for this provider, %s, is not in the list."
+              % default, file=sys.stderr)
+        print("         It has probably been retired. Pass --model explicitly.",
+              file=sys.stderr)
+        return 1
+    return 0
+
+
 def main(argv: List[str] = None) -> int:
     p = argparse.ArgumentParser(
         prog="promofinder",
@@ -198,6 +220,11 @@ def main(argv: List[str] = None) -> int:
     e.add_argument("--pred", default="outputs/promos.json")
     e.add_argument("--labels", default="eval/labels.csv")
     e.set_defaults(func=cmd_eval)
+
+    m = sub.add_parser("models", help="list model ids a provider serves today")
+    m.add_argument("--provider", default="gemini",
+                   choices=["anthropic", "openai", "gemini", "ollama"])
+    m.set_defaults(func=cmd_models)
 
     args = p.parse_args(argv)
     return args.func(args)

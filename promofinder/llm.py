@@ -82,7 +82,10 @@ JUDGEMENT_SCHEMA = {
 DEFAULT_MODELS = {
     "anthropic": "claude-opus-5-5",
     "openai": "gpt-4o-mini",
-    "gemini": "gemini-2.0-flash",
+    # Model ids retire. gemini-2.0-flash and gemini-2.5-flash both 404 now,
+    # which made --provider gemini look broken rather than out of date.
+    # `python -m promofinder models --provider gemini` lists what is live.
+    "gemini": "gemini-3.6-flash",
     "ollama": "llama3.1",
 }
 
@@ -336,11 +339,15 @@ class OllamaScorer(Scorer):
 class GeminiScorer(Scorer):
     name = "gemini"
 
+    ENDPOINT = ("https://generativelanguage.googleapis.com/v1beta/models/"
+                "%s:generateContent?key=%s")
+
     def __init__(self, model: str):
         self.model = model
         self.key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
         if not self.key:
             raise RuntimeError("set GEMINI_API_KEY to use --provider gemini")
+        self.usage = {"input_tokens": 0, "output_tokens": 0}
 
     def describe(self) -> str:
         return "gemini:%s" % self.model
@@ -348,23 +355,86 @@ class GeminiScorer(Scorer):
     def judge(self, payload: str) -> dict:
         import requests
 
-        url = ("https://generativelanguage.googleapis.com/v1beta/models/"
-               "%s:generateContent?key=%s" % (self.model, self.key))
-        resp = requests.post(
-            url,
-            json={
-                "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-                "contents": [{"parts": [{"text": payload + "\n\nReply with JSON only."}]}],
-                "generationConfig": {"responseMimeType": "application/json"},
-            },
-            timeout=300,
-        )
+        url = self.ENDPOINT % (self.model, self.key)
+        body = {
+            "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
+            "contents": [{"parts": [{"text": payload + "\n\nReply with JSON only."}]}],
+            "generationConfig": {"responseMimeType": "application/json"},
+        }
+
+        # A whole-show run is one request per episode. Without a retry a single
+        # transient 503 - and the newest flash models return them under load -
+        # takes down a run that is 50 episodes deep.
+        last_err = None
+        for attempt in range(4):
+            try:
+                resp = requests.post(url, json=body, timeout=300)
+                if resp.status_code in (429, 500, 502, 503, 504):
+                    last_err = RuntimeError(
+                        "gemini %s on attempt %d" % (resp.status_code, attempt + 1))
+                    time.sleep(2.0 * (attempt + 1))
+                    continue
+                resp.raise_for_status()
+                payload_json = resp.json()
+
+                meta = payload_json.get("usageMetadata") or {}
+                self.usage["input_tokens"] += meta.get("promptTokenCount", 0) or 0
+                self.usage["output_tokens"] += meta.get("candidatesTokenCount", 0) or 0
+
+                text = payload_json["candidates"][0]["content"]["parts"][0]["text"]
+                data = extract_json(text)
+                if data and "clips" in data:
+                    return data
+                last_err = RuntimeError("no parseable JSON from gemini")
+            except Exception as exc:  # noqa: BLE001 - retried, raised below
+                last_err = exc
+            time.sleep(1.5 * (attempt + 1))
+        raise RuntimeError("gemini scoring failed: %s" % last_err)
+
+
+def list_models(provider: str) -> List[str]:
+    """
+    Model ids that this provider will actually serve today.
+
+    Exists because they retire: the default here was gemini-2.0-flash, which
+    now 404s, and the failure reads like a broken integration rather than a
+    stale string. Swapping models is only cheap if you can see the choices.
+    """
+    if provider == "gemini":
+        import requests
+
+        key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+        if not key:
+            raise RuntimeError("set GEMINI_API_KEY to list gemini models")
+        resp = requests.get(
+            "https://generativelanguage.googleapis.com/v1beta/models",
+            params={"key": key, "pageSize": 200}, timeout=60)
         resp.raise_for_status()
-        text = resp.json()["candidates"][0]["content"]["parts"][0]["text"]
-        data = extract_json(text)
-        if not data or "clips" not in data:
-            raise RuntimeError("no parseable JSON from gemini")
-        return data
+        return sorted(
+            m["name"].replace("models/", "")
+            for m in resp.json().get("models", [])
+            if "generateContent" in m.get("supportedGenerationMethods", []))
+
+    if provider == "anthropic":
+        import anthropic
+
+        return sorted(m.id for m in anthropic.Anthropic().models.list(limit=100).data)
+
+    if provider == "openai":
+        from openai import OpenAI
+
+        return sorted(m.id for m in OpenAI().models.list().data)
+
+    if provider == "ollama":
+        import requests
+
+        resp = requests.get("http://localhost:11434/api/tags", timeout=30)
+        resp.raise_for_status()
+        return sorted(m["name"] for m in resp.json().get("models", []))
+
+    if provider == "heuristic":
+        return []
+    raise ValueError("unknown provider: %s" % provider)
 
 
 def build_scorer(provider: str = "auto", model: Optional[str] = None,
