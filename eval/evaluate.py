@@ -95,8 +95,21 @@ def run_eval(pred_path: str, labels_path: str) -> int:
     ordered = sorted(promos, key=lambda p: p.get("rank") or 10**6)
     judged = [(p, labels[p["id"]]) for p in ordered if p["id"] in labels]
 
-    print("Evaluating %s" % os.path.abspath(pred_path))
-    print("  %d clips ranked, %d of them labelled by a human" % (len(ordered), len(judged)))
+    print("Evaluating %s" % os.path.relpath(pred_path))
+    print("  %d clips ranked, %d of them labelled by a human"
+          % (len(ordered), len(judged)))
+
+    # Labels outlive the candidates they were written against. When a rule
+    # changes a window (the continuation rule moves a start point forward),
+    # the old id disappears and its label is stranded. Say so: a silently
+    # shrinking denominator is the easiest way to flatter a precision score.
+    stranded = sorted(set(labels) - {p["id"] for p in ordered})
+    if stranded:
+        print("  %d label(s) match no current candidate, so they are excluded:"
+              % len(stranded))
+        for cid in stranded:
+            print("    %-28s label %d  %s"
+                  % (cid, labels[cid][0], labels[cid][1][:58]))
     if not judged:
         print("  No overlap between predictions and labels.", file=sys.stderr)
         return 2
