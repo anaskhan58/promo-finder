@@ -83,13 +83,37 @@ def build_payload(episode_no: int, cands: List[Candidate],
     return "\n".join(header + body)
 
 
+def _merge(key: str, cands: List[Candidate], result: dict,
+           judgements: Dict[str, dict], failures: List[dict]) -> None:
+    """Take the clips the model actually returned, and record the ones it skipped."""
+    allowed = {c.cand_id for c in cands}
+    seen = set()
+    for clip in result.get("clips", []):
+        cid = str(clip.get("id", "")).strip()
+        if cid not in allowed:
+            continue
+        judgements[cid] = clip
+        seen.add(cid)
+    missing = [c.cand_id for c in cands if c.cand_id not in seen]
+    if missing:
+        failures.append({"batch": key,
+                         "error": "model returned no entry for these clips",
+                         "candidate_ids": missing})
+
+
 def score_candidates(candidates: List[Candidate], episodes: List[Episode],
-                     scorer: Scorer, progress=None
+                     scorer: Scorer, progress=None, workers: int = 1
                      ) -> Tuple[Dict[str, dict], List[dict]]:
     """
     Score every candidate. Returns judgements keyed by candidate id, plus a log
     of batches that failed, so a partial run is still usable and still honest
     about what is missing.
+
+    One batch is one episode, and batches do not depend on each other, so with
+    a network scorer they are sent concurrently: a 50-episode show is ~50
+    minutes serial and a few minutes at workers=6. The heuristic scorer stays
+    serial regardless - it carries per-batch state on the scorer object, and it
+    is instant anyway.
     """
     ep_map = {ep.number: ep for ep in episodes}
 
@@ -100,42 +124,61 @@ def score_candidates(candidates: List[Candidate], episodes: List[Episode],
 
     judgements: Dict[str, dict] = {}
     failures: List[dict] = []
+    ordered = sorted(batches.items())
+    total = len(ordered)
 
-    for i, (key, cands) in enumerate(sorted(batches.items()), start=1):
-        if progress:
-            progress(i, len(batches), key)
+    serial = isinstance(scorer, HeuristicScorer) or workers <= 1
 
-        if isinstance(scorer, HeuristicScorer):
-            scorer.context = {
-                c.cand_id: {
-                    "signals": c.signals,
-                    "first_line": _first_line(c, ep_map),
-                    "last_line": _last_line(c, ep_map),
+    if serial:
+        for i, (key, cands) in enumerate(ordered, start=1):
+            if progress:
+                progress(i, total, key)
+            if isinstance(scorer, HeuristicScorer):
+                scorer.context = {
+                    c.cand_id: {
+                        "signals": c.signals,
+                        "first_line": _first_line(c, ep_map),
+                        "last_line": _last_line(c, ep_map),
+                    }
+                    for c in cands
                 }
-                for c in cands
-            }
-
-        episode_no = cands[0].segments[0].episode
-        payload = build_payload(episode_no, cands, ep_map)
-        try:
-            result = scorer.judge(payload)
-        except Exception as exc:  # noqa: BLE001 - recorded, run continues
-            failures.append({"batch": key, "error": str(exc),
-                             "candidate_ids": [c.cand_id for c in cands]})
-            continue
-
-        seen = set()
-        for clip in result.get("clips", []):
-            cid = str(clip.get("id", "")).strip()
-            if cid not in {c.cand_id for c in cands}:
+            payload = build_payload(cands[0].segments[0].episode, cands, ep_map)
+            try:
+                result = scorer.judge(payload)
+            except Exception as exc:  # noqa: BLE001 - recorded, run continues
+                failures.append({"batch": key, "error": str(exc),
+                                 "candidate_ids": [c.cand_id for c in cands]})
                 continue
-            judgements[cid] = clip
-            seen.add(cid)
-        missing = [c.cand_id for c in cands if c.cand_id not in seen]
-        if missing:
-            failures.append({"batch": key, "error": "model returned no entry for these clips",
-                             "candidate_ids": missing})
+            _merge(key, cands, result, judgements, failures)
+        return judgements, failures
 
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
+
+    lock = threading.Lock()
+    done = [0]
+
+    def work(item):
+        key, cands = item
+        payload = build_payload(cands[0].segments[0].episode, cands, ep_map)
+        try:
+            return key, cands, scorer.judge(payload), None
+        except Exception as exc:  # noqa: BLE001 - recorded, run continues
+            return key, cands, None, exc
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for key, cands, result, exc in pool.map(work, ordered):
+            with lock:
+                done[0] += 1
+                if progress:
+                    progress(done[0], total, key)
+            if exc is not None:
+                failures.append({"batch": key, "error": str(exc),
+                                 "candidate_ids": [c.cand_id for c in cands]})
+                continue
+            _merge(key, cands, result, judgements, failures)
+
+    failures.sort(key=lambda f: f["batch"])
     return judgements, failures
 
 

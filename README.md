@@ -26,14 +26,25 @@ python -m promofinder run --input <your-episode-folder> --out outputs
 
 # or any other model, same code path
 python -m promofinder run --input <your-episode-folder> --out outputs --provider anthropic --model claude-haiku-5-5
-python -m promofinder run --input <your-episode-folder> --out outputs --provider gemini   --model gemini-2.0-flash
-python -m promofinder run --input <your-episode-folder> --out outputs --provider ollama   --model llama3.1
+python -m promofinder run --input <your-episode-folder> --out outputs --provider gemini   --model gemini-3.6-flash
+python -m promofinder run --input <your-episode-folder> --out outputs --provider ollama   --model llama3.2
+```
+
+Model ids retire. `models` lists what a provider will serve today and warns
+if the id configured here is no longer among them:
+
+```bash
+python -m promofinder models --provider gemini
 ```
 
 `--input` points at a folder; every `.txt` under it is treated as one episode.
 Nested folders are fine.
 
 ### Other commands
+
+A whole-show run is one request per episode and those are independent, so
+they go out concurrently. `--workers 6` is the default; `--workers 1` is
+serial, which on a 50-episode show is roughly fifty minutes instead of a few.
 
 ```bash
 python -m promofinder inspect --input <your-episode-folder>      # what the parser saw

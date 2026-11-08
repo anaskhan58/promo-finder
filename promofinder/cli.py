@@ -60,7 +60,8 @@ def cmd_run(args) -> int:
     def progress(i, n, key):
         print("  [%2d/%2d] %s" % (i, n, key), end="\r", flush=True)
 
-    judgements, failures = score_candidates(candidates, episodes, scorer, progress)
+    judgements, failures = score_candidates(
+        candidates, episodes, scorer, progress, workers=args.workers)
     print(" " * 40, end="\r")
     print("  %d clips judged, %d batches failed" % (len(judgements), len(failures)))
 
@@ -203,6 +204,8 @@ def main(argv: List[str] = None) -> int:
                    help="candidate windows nominated per episode")
     r.add_argument("--stitch", type=int, default=6,
                    help="multi-segment candidates to build (0 to disable)")
+    r.add_argument("--workers", type=int, default=6,
+                   help="episode batches scored concurrently (1 = serial)")
     r.add_argument("--top", type=int, default=25, help="promos to publish")
     r.add_argument("--show", type=int, default=10, help="promos to print")
     r.set_defaults(func=cmd_run)
